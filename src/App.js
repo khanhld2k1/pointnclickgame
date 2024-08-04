@@ -1,6 +1,26 @@
 import './App.css';
+import React, { useState, useEffect } from "react";
 
 function App() {
+  const [startPoint, setStartPoint] = useState("");
+  useEffect(() => {
+    if (startPoint === ""){
+      setStartPoint(0);
+    }
+  }, [startPoint]);
+  
+  const handleInput = (e) => {
+    if (startPoint === ""){
+      setStartPoint(0);
+    }else{
+      setStartPoint(e.target.value);
+    }
+  }
+  const handleClick = () => {
+    for(let i = 1; i <= startPoint; ++i){
+      console.log(i);
+    }
+  }
   return (
     <div className="App">
       <div className="game_container">
@@ -11,18 +31,24 @@ function App() {
         </div>
 
         <div className="game_controller">
-          <div className="game_point">Point</div>
+          <div className="game_point">
+            <div>Point:</div>
+            <input 
+              type="number" 
+              defaultValue={startPoint} 
+              onChange={handleInput} 
+            />
+          </div>
           <div className="game_timer">Timer</div>
         </div>
 
         <div className="game_button">
-          <button>refresh</button>
+          <button onClick={handleClick}>refresh</button>
+          <button onClick={()=>{console.log(startPoint)}}>Check</button>
         </div>
         
-
         <div className="game_playArea">
-          <div className="game_blocks">
-          </div>
+          <div className="game_blocks"></div>
         </div>
       </div>
     </div>
